@@ -1,21 +1,13 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if(s.length()!=t.length()){
-            return false;
-        }
-        List<Character>list1=new ArrayList<>();
-        List<Character>list2=new ArrayList<>();
+        if (s.length() != t.length()) {
+            return false;}
+        HashMap<Character,Integer> s1=new HashMap<>();
+        HashMap<Character,Integer> t1=new HashMap<>();
         for(int i=0;i<s.length();i++){
-            list1.add(s.charAt(i));
-            list2.add(t.charAt(i));
-        }
-        Collections.sort(list1);
-        Collections.sort(list2);
-        for(int i=0;i<list1.size();i++){
-            if(list1.get(i)!=list2.get(i)){
-                 return false;
-            }
-        }
-        return true;
+            s1.put(s.charAt(i), s1.getOrDefault(s.charAt(i), 0) + 1);
+            t1.put(t.charAt(i), t1.getOrDefault(t.charAt(i), 0) + 1);
+        }      
+        return  s1.equals(t1);
     }
 }
