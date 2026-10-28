@@ -1,23 +1,23 @@
 class Solution {
     public int minOperations(int[][] grid, int x) {
-        int ops=0;
-        ArrayList<Integer>ans= new ArrayList<>();
+        ArrayList<Integer> list= new ArrayList<>();
         for(int i=0;i<grid.length;i++){
-            for(int j=0;j<grid[i].length;j++){
-                ans.add(grid[i][j]);
+            for(int j=0;j<grid[0].length;j++){
+                list.add(grid[i][j]);
             }
         }
-        Collections.sort(ans);
-        int rem=ans.get(0)%x;
-        for(Integer m:ans){
-            if(rem!=m%x){
-            return -1;
+        int rem=list.get(0)%x;
+        for(Integer n:list){
+            if(rem!=n%x){
+                return -1;
             }
         }
-        int target=ans.get(ans.size()/2);
-        for(Integer c:ans){
-            ops+=Math.abs(c-target)/x;
+        Collections.sort(list);
+        int target=list.get((list.size()-1)/2);
+        int count=0;
+        for(Integer m:list){
+            count+=Math.abs(m-target)/x;
         }
-        return ops;
+        return count;
     }
 }
