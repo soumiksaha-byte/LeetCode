@@ -3,18 +3,30 @@ class Solution {
         if(nums.length==0){
             return 0;
         }
-        Arrays.sort(nums);
-        int max=1, curr=1;
-        for(int i=0;i<nums.length-1;i++){
-            if(nums[i]==nums[i+1]){
+        HashSet<Integer> set= new HashSet<>();
+        for(int num:nums){
+            set.add(num);
+        }
+        int count=1;
+        int max=1;
+        int j=1;
+        for(int i:set){
+            if(set.contains(i-1)){
                 continue;
-            }else if(nums[i]+1==nums[i+1]){
-                curr++;
             }else{
-                max=Math.max(max,curr);
-                curr=1;
+                j=1;
+                count=1;
+                while(true){
+                    if(set.contains(i+j)){
+                        count++;
+                        j++;
+                    }else{
+                        break;
+                    }
+                }
+                max=Math.max(max,count);
             }
         }
-        return Math.max(max,curr);
+         return max;
     }
 }
